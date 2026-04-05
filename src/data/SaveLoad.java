@@ -5,6 +5,8 @@ import main.GamePanel;
 import object.*;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.Statement;
 
 public class SaveLoad {
 
@@ -75,6 +77,7 @@ public class SaveLoad {
 
             //Write the DataStorage object
             oos.writeObject(ds);
+            saveToDatabase(ds);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -147,4 +150,96 @@ public class SaveLoad {
             System.out.println("Load Exception!");
         }
     }
+    public void saveToDatabase(DataStorage ds)
+    {
+        try
+        {
+            Connection conn = DatabaseManager.connect();
+
+            Statement stmt = conn.createStatement();
+
+            stmt.executeUpdate("DELETE FROM inventory");
+            stmt.executeUpdate("DELETE FROM equipment");
+            stmt.executeUpdate("DELETE FROM item");
+            stmt.executeUpdate("DELETE FROM player");
+
+            // Reset auto increment
+            stmt.executeUpdate("ALTER TABLE inventory AUTO_INCREMENT = 1");
+            stmt.executeUpdate("ALTER TABLE equipment AUTO_INCREMENT = 1");
+            stmt.executeUpdate("ALTER TABLE item AUTO_INCREMENT = 1");
+            stmt.executeUpdate("ALTER TABLE player AUTO_INCREMENT = 1");
+
+            // PLAYER
+            String playerSql = "INSERT INTO player(level, max_life, life, max_mana, mana, strength, dexterity, exp, next_level_exp, coin) VALUES (" +
+                    ds.level + "," +
+                    ds.maxLife + "," +
+                    ds.life + "," +
+                    ds.maxMana + "," +
+                    ds.mana + "," +
+                    ds.strength + "," +
+                    ds.dexterity + "," +
+                    ds.exp + "," +
+                    ds.nextLevelExp + "," +
+                    ds.coin + ")";
+
+            stmt.executeUpdate(playerSql, Statement.RETURN_GENERATED_KEYS);
+
+            int playerId = -1;
+
+            var playerRs = stmt.getGeneratedKeys();
+            if(playerRs.next())
+            {
+                playerId = playerRs.getInt(1);
+            }
+
+            // ITEM
+            for(int i = 0; i < ds.itemNames.size(); i++)
+            {
+                String itemName = ds.itemNames.get(i);
+
+                String itemSql = "INSERT INTO item(name) VALUES ('" + itemName + "')";
+                stmt.executeUpdate(itemSql);
+            }
+
+            // INVENTORY
+            for(int i = 0; i < ds.itemNames.size(); i++)
+            {
+                int itemId = i + 1;
+                int amount = ds.itemAmounts.get(i);
+
+                String inventorySql = "INSERT INTO inventory(player_id, item_id, quantity) VALUES (" +
+                        playerId + ", " +
+                        itemId + ", " +
+                        amount + ")";
+
+                stmt.executeUpdate(inventorySql);
+            }
+
+            // EQUIPMENT
+            int weaponItemId = ds.currentWeaponSlot + 1;
+            int shieldItemId = ds.currentShieldSlot + 1;
+
+            String weaponSql = "INSERT INTO equipment(player_id, item_id, slot) VALUES (" +
+                    playerId + ", " +
+                    weaponItemId + ", 'weapon')";
+
+            stmt.executeUpdate(weaponSql);
+
+            String shieldSql = "INSERT INTO equipment(player_id, item_id, slot) VALUES (" +
+                    playerId + ", " +
+                    shieldItemId + ", 'shield')";
+
+            stmt.executeUpdate(shieldSql);
+
+            conn.close();
+
+            System.out.println("Database saved!");
+        }
+        catch(Exception e)
+        {
+            System.out.println("Database Save Error");
+            e.printStackTrace();
+        }
+    }
+
 }
