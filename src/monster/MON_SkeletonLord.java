@@ -105,9 +105,9 @@ public class MON_SkeletonLord extends Entity {
     }
     public void setDialogue()
     {
-        dialogues[0][0] = "No one can steal my treasure.";
-        dialogues[0][1] = "You will die here.";
-        dialogues[0][2] = "WELCOME TO YOUR DOOM!";
+        dialogues[0][0] = "Thật đáng khen khi ngươi có thể bước đến đây !!!.";
+        dialogues[0][1] = "Nhưng rất tiếc, ngươi sẽ phải chết ở đây !!!.";
+        dialogues[0][2] = "HÃY XEM SỨC MẠNH CỦA TA!";
 
     }
     public void setAction()

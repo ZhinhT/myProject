@@ -18,6 +18,17 @@ public class Player extends Entity{
     public boolean attackCanceled = false;
     public boolean lightUpdated = false;
 
+    //FIX
+    public int bonusLife = 0;
+    public int bonusMana = 0;
+    public int bonusStrength = 0;
+    public int bonusDexterity = 0;
+    public int lifePerLevel = 2;
+    public int baseMaxLife = 10;
+    public int baseSpeed = 4;
+    public int bonusSpeed = 0;
+
+
     public Player(GamePanel gp, KeyHandler keyH)
     {
         super(gp); // calling constructor of super class(from entity class)
@@ -53,13 +64,14 @@ public class Player extends Entity{
 //        worldY = gp.tileSize * 9;
 //        gp.currentMap = 3;
 
-        defaultSpeed = 4;
+        defaultSpeed = baseSpeed;
         speed = defaultSpeed;
         direction = "down";
 
         //PLAYER STATUS
         level = 1;
-        maxLife = 10;
+        baseMaxLife = 10;
+        maxLife = baseMaxLife;
         life = maxLife;
         maxMana = 8;
         mana = maxMana;
@@ -93,7 +105,7 @@ public class Player extends Entity{
     }
     public void setDialogue()
     {
-        dialogues[0][0] = "You are level " + level + " now!\n" + "You feel stronger!";
+        dialogues[0][0] = "Bạn đã lên cấp " + level + "\n";
     }
     public void restoreStatus()
     {
@@ -128,12 +140,13 @@ public class Player extends Entity{
         attackArea = currentWeapon.attackArea;
         motion1_duration = currentWeapon.motion1_duration;
         motion2_duration = currentWeapon.motion2_duration;
-        return attack = strength * currentWeapon.attackValue;
+
+        return (strength + bonusStrength) * currentWeapon.attackValue;
     }
 
     public int getDefense()
     {
-        return defense = dexterity * currentShield.defenseValue;
+        return (dexterity + bonusDexterity) * currentShield.defenseValue;
     }
     public int getCurrentWeaponSlot()
     {
@@ -473,11 +486,11 @@ public class Player extends Entity{
                 {
                     //inventory.add(gp.obj[gp.currentMap][i]); //canObtainItem() already adds item
                     gp.playSE(1);
-                    text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
+                    text = "Đã nhặt " + gp.obj[gp.currentMap][i].name + "!";
                 }
                 else
                 {
-                    text = "You cannot carry any more";
+                    text = "Balo của bạn đã đầy !";
                 }
                 gp.ui.addMessage(text);
                 gp.obj[gp.currentMap][i] = null;
@@ -545,7 +558,7 @@ public class Player extends Entity{
                 if(gp.monster[gp.currentMap][i].life <= 0)
                 {
                     gp.monster[gp.currentMap][i].dying = true;
-                    gp.ui.addMessage("Killed the " + gp.monster[gp.currentMap][i].name + "!");
+                    gp.ui.addMessage("Đã giết " + gp.monster[gp.currentMap][i].name + "!");
                     gp.ui.addMessage("Exp +" + gp.monster[gp.currentMap][i].exp + "!");
                     exp += gp.monster[gp.currentMap][i].exp;
                     checkLevelUp();
@@ -582,28 +595,38 @@ public class Player extends Entity{
     }
     public void checkLevelUp()
     {
-         while(exp >= nextLevelExp)
-         {
-             level++;
-             exp = exp - nextLevelExp;          //Example: Your exp is 4 and nextLevelExp is 5. You killed a monster and receive 2exp. So, your exp is now 6. Your 1 extra xp will be recovered for the next level.
-             if(level <= 4)
-             {
-                 nextLevelExp = nextLevelExp + 4;   //Level 2 to 6: 4xp- 8xp- 12xp- 16xp- 20xp
-             }
-             else
-             {
-                 nextLevelExp = nextLevelExp + 8;  //After Level 6: 28xp- 36xp- 44xp- 52xp- 60xp
-             }
-             maxLife += 2;
-             strength++;
-             dexterity++;
-             attack = getAttack();
-             defense = getDefense();
-             gp.playSE(8); //levelup.wav
+        while(exp >= nextLevelExp)
+        {
+            level++;
+            exp = exp - nextLevelExp;
 
-             dialogues[0][0] = "You are level " + level + " now!\n" + "You feel stronger!";
-             setDialogue();
-             startDialogue(this,0);
+            if(level <= 4)
+            {
+                nextLevelExp = nextLevelExp + 4;
+            }
+            else
+            {
+                nextLevelExp = nextLevelExp + 8;
+            }
+
+            baseMaxLife += lifePerLevel;
+            strength++;
+            dexterity++;
+
+            maxLife = baseMaxLife + bonusLife;
+            maxMana = 8 + bonusMana;
+
+            attack = getAttack();
+            defense = getDefense();
+
+            life = maxLife;
+            mana = maxMana;
+
+            gp.playSE(8);
+
+            dialogues[0][0] = "Bạn đã lên cấp " + level + "!\n";
+            setDialogue();
+            startDialogue(this,0);
          }
     }
     public void selectItem()

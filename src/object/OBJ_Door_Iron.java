@@ -28,7 +28,7 @@ public class OBJ_Door_Iron extends Entity {
     }
     public void setDialogue()
     {
-        dialogues[0][0] = "It won't budge.";
+        dialogues[0][0] = "Tôi không làm nhúc nhích được cánh cửa này !!";
     }
     public void interact() {
         startDialogue(this,0);

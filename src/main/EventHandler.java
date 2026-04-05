@@ -52,10 +52,10 @@ public class EventHandler{
     }
     public void setDialogue()
     {
-        eventMaster.dialogues[0][0] = "You fall into a pit!";
+        eventMaster.dialogues[0][0] = "Bạn đã ngã vào hố!";
 
-        eventMaster.dialogues[1][0] = "You drink the water.\nYour life and mana has been recovered.\n"+ "(The progress has been saved)";
-        eventMaster.dialogues[1][1] = "Damn, this is good water.";
+        eventMaster.dialogues[1][0] = "Bạn uống nước.\nMáu và mana của bạn đã được phục hồi.\n"+ "(Đã lưu tiến trình !)";
+        eventMaster.dialogues[1][1] = "Đúng là nước thánh, thật sự tốt.";
     }
     public void checkEvent()
     {

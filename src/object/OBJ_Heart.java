@@ -23,7 +23,7 @@ public class OBJ_Heart extends Entity {
     public boolean use(Entity entity)
     {
         gp.playSE(2);
-        gp.ui.addMessage("Life +" + value);
+        gp.ui.addMessage("Máu +" + value);
         entity.life += value;
         return true;
     }

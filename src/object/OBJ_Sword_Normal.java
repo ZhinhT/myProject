@@ -13,10 +13,10 @@ public class OBJ_Sword_Normal extends Entity {
         type = type_sword;
         name = objName;
         down1 = setup("/objects/sword_normal",gp.tileSize, gp.tileSize);
-        attackValue = 10;
+        attackValue = 1;
         attackArea.width = 36;
         attackArea.height= 36;
-        description = "[" + name + "]\nAn old sword.";
+        description = "[" + name + "]\nThanh gươm diệt quỷ.";
         price = 30;
         knockBackPower = 3;
         motion1_duration = 5;

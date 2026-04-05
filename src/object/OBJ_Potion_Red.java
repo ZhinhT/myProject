@@ -17,7 +17,7 @@ public class OBJ_Potion_Red extends Entity {
         name = objName;
         value = 5;
         down1 = setup("/objects/potion_red", gp.tileSize, gp.tileSize);
-        description = "[" + name + "]\nHeals your life by " + value + ".";
+        description = "[" + name + "]\nHồi cho bạn " + value + "máu.";
         price = 50;
         stackable = true;
 
@@ -25,7 +25,7 @@ public class OBJ_Potion_Red extends Entity {
     }
     public void setDialogue()
     {
-        dialogues[0][0] = "You drink the " + name + "!\n" + "Your life has been recovered by " + value + ".";
+        dialogues[0][0] = "Bạn uống " + name + "!\n" + "Máu của bạn đã được hồi " + value + "máu.";
     }
     public boolean use(Entity entity)
     {

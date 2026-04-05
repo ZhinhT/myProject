@@ -120,19 +120,66 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ENTER) {
                 //FIGHTER
                 if (gp.ui.commandNum == 0) {
-                    System.out.println("Do some fighter specific stuff!");
+                    gp.player.bonusLife = 4;
+                    gp.player.bonusMana = -2;
+                    gp.player.bonusStrength = 0;
+                    gp.player.bonusDexterity = 1;
+                    gp.player.lifePerLevel = 2;
+
+                    gp.player.maxLife = gp.player.baseMaxLife + gp.player.bonusLife;
+                    gp.player.life = gp.player.maxLife;
+
+                    gp.player.maxMana += gp.player.bonusMana;
+                    gp.player.mana = gp.player.maxMana;
+
+                    gp.player.attack = gp.player.getAttack();
+                    gp.player.defense = gp.player.getDefense();
+
                     gp.gameState = gp.playState;
                     gp.playMusic(0);
                 }
-                //THIEF
+                //ASSASSIN
                 if (gp.ui.commandNum == 1) {
-                    System.out.println("Do some thief specific stuff!");
+                    gp.player.bonusLife = -2;
+                    gp.player.bonusMana = -2;
+                    gp.player.bonusStrength = 3;
+                    gp.player.bonusDexterity = 0;
+                    gp.player.lifePerLevel = 1;
+
+                    gp.player.maxLife = gp.player.baseMaxLife + gp.player.bonusLife;
+                    gp.player.life = gp.player.maxLife;
+
+                    gp.player.maxMana += gp.player.bonusMana;
+                    gp.player.mana = gp.player.maxMana;
+
+                    gp.player.bonusSpeed = 1;
+                    gp.player.defaultSpeed = gp.player.baseSpeed + gp.player.bonusSpeed;
+                    gp.player.speed = gp.player.defaultSpeed;
+
+                    gp.player.attack = gp.player.getAttack();
+                    gp.player.defense = gp.player.getDefense();
+
                     gp.gameState = gp.playState;
                     gp.playMusic(0);
                 }
                 //SORCERER
                 if (gp.ui.commandNum == 2) {
-                    System.out.println("Do some sorcerer specific stuff!");
+                    gp.player.bonusLife = -2;
+                    gp.player.bonusMana = 4;
+                    gp.player.bonusStrength = 0;
+                    gp.player.bonusDexterity = 0;
+                    gp.player.lifePerLevel = 1;
+
+                    gp.player.maxLife = gp.player.baseMaxLife + gp.player.bonusLife;
+                    gp.player.life = gp.player.maxLife;
+
+                    gp.player.maxMana += gp.player.bonusMana;
+                    gp.player.mana = gp.player.maxMana;
+
+                    gp.player.attack = gp.player.getAttack();
+                    gp.player.defense = gp.player.getDefense();
+
+
                     gp.gameState = gp.playState;
                     gp.playMusic(0);
                 }

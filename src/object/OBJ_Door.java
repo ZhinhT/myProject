@@ -31,7 +31,7 @@ public class OBJ_Door extends Entity {
     }
     public void setDialogue()
     {
-        dialogues[0][0] = "You need a key to open this.";
+        dialogues[0][0] = "Bạn cần chìa khóa để mở cửa !!!";
     }
     public void interact() {
         startDialogue(this,0);

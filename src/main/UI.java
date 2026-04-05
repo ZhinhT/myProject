@@ -42,7 +42,7 @@ public class UI {
         this.gp = gp;
         try
         {
-            InputStream is = getClass().getResourceAsStream("/font/x12y16pxMaruMonica.ttf");
+            InputStream is = getClass().getResourceAsStream("/font/minecraft-f2d-v1-42.ttf");
             maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
             is = getClass().getResourceAsStream("/font/Purisa Bold.ttf");
             purisaB = Font.createFont(Font.TRUETYPE_FONT, is);
@@ -67,7 +67,7 @@ public class UI {
     }
     public void drawPauseScreen()
     {
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD,80F));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,30F));
         String text = "GAME PAUSED";
         int x = getXforCenteredText(text);
         int y = gp.screenHeight / 2;
@@ -84,7 +84,7 @@ public class UI {
 
         drawSubWindow(x,y,width,height);
 
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,28F));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,20F));
         x += gp.tileSize;
         y += gp.tileSize;
 
@@ -146,7 +146,7 @@ public class UI {
 
         // TEXT
         g2.setColor(Color.white);
-        g2.setFont(g2.getFont().deriveFont(32F));
+        g2.setFont(g2.getFont().deriveFont(20F));
 
         int textX = frameX + 20;
         int textY = frameY + gp.tileSize;
@@ -299,7 +299,7 @@ public class UI {
             //DISPLAY AMOUNT
             if(entity == gp.player && entity.inventory.get(i).amount > 1)  //merchant npc's inventory cannot stack items
             {
-                g2.setFont(g2.getFont().deriveFont(32f));
+                g2.setFont(g2.getFont().deriveFont(20f));
                 int amountX;
                 int amountY;
 
@@ -349,7 +349,7 @@ public class UI {
             //DRAW DESCRIPTION TEXT
             int textX = dFrameX + 20;
             int textY = dFrameY + gp.tileSize;
-            g2.setFont(g2.getFont().deriveFont(28F));
+            g2.setFont(g2.getFont().deriveFont(17F));
 
             int itemIndex = getItemIndexOnSlot(slotCol, slotRow);
             if(itemIndex < entity.inventory.size())
@@ -406,7 +406,7 @@ public class UI {
         //DRAW TEXTS
         x += gp.tileSize;
         y += gp.tileSize;
-        g2.drawString("Buy",x,y);
+        g2.drawString("Mua",x,y);
         if(commandNum == 0)
         {
             g2.drawString(">", x-24,y);
@@ -416,7 +416,7 @@ public class UI {
             }
         }
         y += gp.tileSize;
-        g2.drawString("Sell",x,y);
+        g2.drawString("Bán",x,y);
         if(commandNum == 1)
         {
             g2.drawString(">", x-24,y);
@@ -426,7 +426,7 @@ public class UI {
             }
         }
         y += gp.tileSize;
-        g2.drawString("Leave",x,y);
+        g2.drawString("Thoát",x,y);
         if(commandNum == 2)
         {
             g2.drawString(">", x-24,y);
@@ -451,7 +451,7 @@ public class UI {
         int width = gp.tileSize * 6;
         int height = gp.tileSize * 2;
         drawSubWindow(x,y,width,height);
-        g2.drawString("[ESC] Back", x+24,y+60);
+        g2.drawString("[ESC] Quay lại", x+24,y+60);
 
         // DRAW PLAYER COIN WINDOW
         x = gp.tileSize * 12;
@@ -459,7 +459,7 @@ public class UI {
         width = gp.tileSize * 6;
         height = gp.tileSize * 2;
         drawSubWindow(x,y,width,height);
-        g2.drawString("Your Coin: " + gp.player.coin, x+24,y+60);
+        g2.drawString("Tiền của bạn: " + gp.player.coin, x+24,y+60);
 
         // DRAW PRICE WINDOW
         int itemIndex = getItemIndexOnSlot(npcSlotCol,npcSlotRow);
@@ -526,7 +526,7 @@ public class UI {
         width = gp.tileSize * 6;
         height = gp.tileSize * 2;
         drawSubWindow(x,y,width,height);
-        g2.drawString("[ESC] Back", x+24,y+60);
+        g2.drawString("[ESC] Quay lại", x+24,y+60);
 
         // DRAW PLAYER COIN WINDOW
         x = gp.tileSize * 12;
@@ -534,7 +534,7 @@ public class UI {
         width = gp.tileSize * 6;
         height = gp.tileSize * 2;
         drawSubWindow(x,y,width,height);
-        g2.drawString("Your Coin: " + gp.player.coin, x+24,y+60);
+        g2.drawString("Tiền của bạn: " + gp.player.coin, x+24,y+60);
 
         // DRAW PRICE WINDOW
         int itemIndex = getItemIndexOnSlot(playerSlotCol,playerSlotRow);
@@ -738,7 +738,7 @@ public class UI {
                     g2.setColor(new Color(255,0,30));
                     g2.fillRect(x,y, (int)hpBarValue,20);
 
-                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 24f));
+                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
                     g2.setColor(Color.white);
                     g2.drawString(monster.name, x+4, y-10);
                 }
@@ -750,7 +750,7 @@ public class UI {
     {
         int messageX = gp.tileSize;
         int messageY = gp.tileSize * 4;
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD,24F));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,18F));
 
         for(int i = 0; i < message.size(); i++)
         {
@@ -785,8 +785,8 @@ public class UI {
         {
 
             //TITLE NAME
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
-            String text = "Blue Boy Adventure\n";
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80F));
+            String text = "Adventure Game\n";
             int x = getXforCenteredText(text);
             int y = gp.tileSize * 3;
             //SHADOW
@@ -802,7 +802,7 @@ public class UI {
             g2.drawImage(gp.player.down1,x,y,gp.tileSize*2,gp.tileSize*2,null);
 
             //MENU
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
 
             text = "NEW GAME";
             x = getXforCenteredText(text);
@@ -837,14 +837,14 @@ public class UI {
 
             //CLASS SELECTION SCREEN
             g2.setColor(Color.white);
-            g2.setFont(g2.getFont().deriveFont(42F));
+            g2.setFont(g2.getFont().deriveFont(30F));
 
-            String text = "Select your class!";
+            String text = "Chọn hệ tộc!";
             int x = getXforCenteredText(text);
             int y = gp.tileSize * 3;
             g2.drawString(text,x,y);
 
-            text = "Fighter";
+            text = "Chiến binh";
             x = getXforCenteredText(text);
             y += gp.tileSize * 3;
             g2.drawString(text,x,y);
@@ -853,7 +853,7 @@ public class UI {
                 g2.drawString(">",x-gp.tileSize,y);
             }
 
-            text = "Thief";
+            text = "Sát thủ";
             x = getXforCenteredText(text);
             y += gp.tileSize;
             g2.drawString(text,x,y);
@@ -862,7 +862,7 @@ public class UI {
                 g2.drawString(">",x-gp.tileSize,y);
             }
 
-            text = "Sorcerer";
+            text = "Phù Thủy";
             x = getXforCenteredText(text);
             y += gp.tileSize;
             g2.drawString(text,x,y);
@@ -871,7 +871,7 @@ public class UI {
                 g2.drawString(">",x-gp.tileSize,y);
             }
 
-            text = "Back";
+            text = "Thoát";
             x = getXforCenteredText(text);
             y += gp.tileSize * 2;
             g2.drawString(text,x,y);
@@ -889,7 +889,7 @@ public class UI {
         int x;
         int y;
         String text;
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD,110f));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,100f));
         text = "Game Over";
 
         //Shadow
@@ -902,7 +902,7 @@ public class UI {
         g2.drawString(text,x-4,y-4);
 
         //RETRY
-        g2.setFont(g2.getFont().deriveFont(50f));
+        g2.setFont(g2.getFont().deriveFont(30f));
         text = "Retry";
         x = getXforCenteredText(text);
         y += gp.tileSize * 4;
@@ -926,7 +926,7 @@ public class UI {
     public void drawOptionsScreen()
     {
         g2.setColor(Color.white);
-        g2.setFont(g2.getFont().deriveFont(32F));
+        g2.setFont(g2.getFont().deriveFont(19F));
 
         // SUB WINDOW
 
@@ -1064,7 +1064,7 @@ public class UI {
         int textX = frameX + gp.tileSize;
         int textY = frameY + gp.tileSize * 3;
 
-        currentDialogue = "The change will take \neffect after restarting \nthe game.";
+        currentDialogue = "Thay đổi khi bạn reset game !!";
         for(String line: currentDialogue.split("\n"))
         {
             g2.drawString(line,textX,textY);
@@ -1073,7 +1073,7 @@ public class UI {
 
         //BACK
         textY = frameY + gp.tileSize * 9;
-        g2.drawString("Back", textX,textY);
+        g2.drawString("Quay lại", textX,textY);
         if(commandNum == 0)
         {
             g2.drawString(">", textX-25, textY);
@@ -1133,14 +1133,14 @@ public class UI {
         int textX = frameX + gp.tileSize;
         int textY = frameY + gp.tileSize * 3;
 
-        currentDialogue = "Quit the game and \nreturn to the title screen?";
+        currentDialogue = "Thoát game và \ntrở về màn hình chính?";
         for(String line: currentDialogue.split("\n"))
         {
             g2.drawString(line,textX,textY);
             textY += 40;
         }
         //YES
-        String text = "Yes";
+        String text = "Có";
         textX = getXforCenteredText(text);
         textY += gp.tileSize * 3;
         g2.drawString(text,textX,textY);
@@ -1158,7 +1158,7 @@ public class UI {
         }
 
         //NO
-        text = "No";
+        text = "Không";
         textX = getXforCenteredText(text);
         textY += gp.tileSize;
         g2.drawString(text,textX,textY);

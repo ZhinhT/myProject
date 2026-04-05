@@ -35,9 +35,9 @@ public class OBJ_Chest extends Entity {
     }
     public void setDialogue()
     {
-        dialogues[0][0] = "You open the chest and find a " + loot.name + "!\n...But you cannot carry any more!";
-        dialogues[1][0] = "You open the chest and find a " + loot.name + "!\nYou obtain the " + loot.name + "!";
-        dialogues[2][0] = "It's empty.";
+        dialogues[0][0] = "Bạn đã mở rương và tìm thấy " + loot.name + "!\n...Nhưng có vẻ balo của bạn đã đầy!";
+        dialogues[1][0] = "Bạn đã mở rương và tìm thấy " + loot.name + "!\nBạn đã nhận được " + loot.name + "!";
+        dialogues[2][0] = "Đây là chiếc rương rỗng.";
     }
     public void interact()
     {

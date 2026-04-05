@@ -29,15 +29,13 @@ public class CutsceneManager {
     public CutsceneManager(GamePanel gp)
     {
         this.gp = gp;
-        endCredit = "Developed by\n"
-                + "Berkayw"
-                + "\n\n\n\n\n\n\n\n\n\n\n"
-                + "Special Thanks\n\n"
-                + "Alperen Aksu\n"
-                + "Ryi Snow\n\n"
-                + "Check his tutorials from RyiSnow YouTube Channel!\n"
+        endCredit = "Thành viên\n"
+                + "Hoàng Minh Sơn\n"
+                + "Trần Xuân Uẩn\n"
+                + "Nguyễn Hữu Thịnh\n\n"
                 + "\n\n\n\n\n\n\n"
-                + "Thank you for playing!";
+                + "Tham khảo\n"
+                + "Youtube: RyiSnow";
     }
     public void draw(Graphics2D g2)
     {
@@ -200,12 +198,12 @@ public class CutsceneManager {
             }*/
             alpha = graduallyAlpha(alpha, 0.005f);
 
-            String text = "After the fierce battle with the Skeleton Lord,\n"
-                    + "the Blue Boy finally found the legendary treasure.\n"
-                    + "But this is not the end of his journey.\n"
-                    + "The Blue Boy's adventure has just begun.";
+            String text = "Sau trận chiến với Chúa Tể Xương,\n"
+                    + "Cuối cùng tôi đã tìm thấy kho báu huyền thoại.\n"
+                    + "Nhưng đây chưa phải là kết thúc của cuộc hành trình.\n"
+                    + "Cuộc phiêu lưu chỉ mới bắt đầu";
 
-            drawString(alpha, 38f, 200, text, 70);
+            drawString(alpha, 28f, 200, text, 70);
 
             if(counterReached(600) == true && alpha == 1f)
             {
@@ -220,7 +218,7 @@ public class CutsceneManager {
 
             alpha = graduallyAlpha(alpha, 0.01f);
 
-            drawString(alpha,120f, gp.screenHeight/2, "Blue Boy Adventure", 40);
+            drawString(alpha,80f, gp.screenHeight/2, "Adventure Game", 40);
 
             if(counterReached(480) == true && alpha == 1f)
             {
@@ -237,7 +235,7 @@ public class CutsceneManager {
 
             y = gp.screenHeight/2;
 
-            drawString(alpha, 38f,  y, endCredit, 40);
+            drawString(alpha, 28f,  y, endCredit, 40);
 
             if(counterReached(240) == true && alpha == 1f)
             {
@@ -251,7 +249,7 @@ public class CutsceneManager {
 
             //Scrolling the credit
             y--;
-            drawString(1f, 38f,  y, endCredit, 40);
+            drawString(1f, 28f,  y, endCredit, 40);
             if(counterReached(1320) == true) //22sec
             {
                 //Reset
