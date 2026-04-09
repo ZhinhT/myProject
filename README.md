@@ -1,4 +1,4 @@
-# Blue Boy Adventure
+# RPG 2D Adventure
 
 <h3> JAVA 2D ACTION RPG </h3> 
 
